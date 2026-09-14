@@ -14,8 +14,20 @@ without authentication. The winget manifests live here too, under
 **macOS / Linux — Homebrew**
 
 ```bash
-brew install edrolo/edrolo/edrolo
+brew install --cask edrolo/edrolo/edrolo
 ```
+
+That taps `Edrolo/homebrew-edrolo` on the way through — no separate `brew tap`
+step. Homebrew strips the `homebrew-` prefix, which is why the tap is spelled
+`edrolo/edrolo`. The two-step form is equivalent:
+
+```bash
+brew tap edrolo/edrolo
+brew install --cask edrolo
+```
+
+Run `brew update` before upgrading. The Cask skips `livecheck`, so Homebrew
+learns about a new version when the tap updates rather than by polling GitHub.
 
 **Windows — winget**
 
