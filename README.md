@@ -14,17 +14,28 @@ without authentication. The winget manifests live here too, under
 **macOS / Linux — Homebrew**
 
 ```bash
+brew trust --cask edrolo/edrolo/edrolo
 brew install --cask edrolo/edrolo/edrolo
 ```
 
-That taps `Edrolo/homebrew-edrolo` on the way through — no separate `brew tap`
-step. Homebrew strips the `homebrew-` prefix, which is why the tap is spelled
-`edrolo/edrolo`. The two-step form is equivalent:
+Homebrew 7 will not load a Cask from a third-party tap until you trust it, so
+the `brew trust` is required once per machine. Skip it and the install fails
+with two errors:
 
-```bash
-brew tap edrolo/edrolo
-brew install --cask edrolo
 ```
+Refusing to load cask edrolo/edrolo/edrolo from untrusted tap edrolo/edrolo.
+Error: Cannot tap edrolo/edrolo: invalid syntax in tap!
+```
+
+The second is misleading — there is nothing wrong with the Cask's syntax. The
+refusal aborts the tap load, and Homebrew reports that as a syntax failure. Act
+on the first line. `brew trust edrolo/edrolo` trusts the whole tap instead of
+this one Cask, if you would rather not repeat it per release... it is the same
+tap either way.
+
+The install taps `Edrolo/homebrew-edrolo` on the way through — no separate
+`brew tap` step. Homebrew strips the `homebrew-` prefix, which is why the tap is
+spelled `edrolo/edrolo`.
 
 Run `brew update` before upgrading. The Cask skips `livecheck`, so Homebrew
 learns about a new version when the tap updates rather than by polling GitHub.
