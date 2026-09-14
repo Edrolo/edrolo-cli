@@ -29,9 +29,12 @@ Error: Cannot tap edrolo/edrolo: invalid syntax in tap!
 
 The second is misleading — there is nothing wrong with the Cask's syntax. The
 refusal aborts the tap load, and Homebrew reports that as a syntax failure. Act
-on the first line. `brew trust edrolo/edrolo` trusts the whole tap instead of
-this one Cask, if you would rather not repeat it per release... it is the same
-tap either way.
+on the first line.
+
+Trust is recorded per Cask name, not per version, so this is genuinely once —
+later releases install with no further prompting. `brew trust edrolo/edrolo`
+trusts everything in the tap instead, now and in future, which is the broader
+grant of the two.
 
 The install taps `Edrolo/homebrew-edrolo` on the way through — no separate
 `brew tap` step. Homebrew strips the `homebrew-` prefix, which is why the tap is
